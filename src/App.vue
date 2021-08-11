@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <BannerMessages />
+    <input type="text" v-model="textBox" />
+    <button @click="addBannerMessage(textBox)">Add Banner Message</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BannerMessages from "./components/BannerMessages.vue";
+import { mapActions } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    BannerMessages,
+  },
+  data() {
+    return {
+      textBox: "",
+    };
+  },
+  methods: {
+    ...mapActions({
+      addBannerMessage: "bannerMessages/addMessage",
+    }),
+  },
+};
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
